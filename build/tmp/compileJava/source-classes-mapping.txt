@@ -1,2 +1,6 @@
-codecalc/Test.java
- codecalc.Test
+codeanalysis/ClassDependencyInfo.java
+ codeanalysis.ClassDependencyInfo
+codeanalysis/Test.java
+ codeanalysis.Test
+codeanalysis/ModuleDependencyInfo.java
+ codeanalysis.ModuleDependencyInfo
