@@ -1,6 +1,12 @@
 codeanalysis/ClassDependencyInfo.java
  codeanalysis.ClassDependencyInfo
-codeanalysis/Test.java
- codeanalysis.Test
+util/FilePathServiceImpl.java
+ util.FilePathServiceImpl
 codeanalysis/ModuleDependencyInfo.java
  codeanalysis.ModuleDependencyInfo
+util/FilePathService.java
+ util.FilePathService
+codeanalysis/ProjectDependencyInfo.java
+ codeanalysis.ProjectDependencyInfo
+codeanalysis/Test.java
+ codeanalysis.Test
