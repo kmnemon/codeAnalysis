@@ -3,31 +3,44 @@ package codeanalysis;
 import java.util.List;
 import java.util.Objects;
 
-public class ModuleDependencyInfo {
-    private String moduleName;
-    private List<ClassDependencyInfo> moduleClasses;
+import static codeanalysis.TypeDependency.ClassType.CLASS;
+import static codeanalysis.TypeDependency.ClassType.ENUM;
 
-    private List<ClassDependencyInfo> fanInClasses;
-    private List<ClassDependencyInfo> fanOutClasses;
+class ModuleDependencyInfo {
+    private String moduleNameWithFullPath;
+    private List<TypeDependency> typesInModule;
+
     private Integer instability;
-
-    private Integer numOfClasses;
-    private Integer numOfAbsAndInterfaceClasses;
     private Integer abstractness;
 
-    private ModuleDependencyInfo(String moduleName, List<ClassDependencyInfo> moduleClasses){
-        this.moduleName = moduleName;
-        this.moduleClasses = List.copyOf(moduleClasses);
+    private ModuleDependencyInfo(String moduleNameWithFullPath, List<TypeDependency> typesInModule){
+        this.moduleNameWithFullPath = moduleNameWithFullPath;
+        this.typesInModule = List.copyOf(typesInModule);
     }
 
-    public static ModuleDependencyInfo create(String moduleName, List<ClassDependencyInfo> moduleClasses){
-        return new ModuleDependencyInfo(moduleName, moduleClasses);
+    public static ModuleDependencyInfo create(String moduleName, List<TypeDependency> typesInModule){
+        return new ModuleDependencyInfo(moduleName, typesInModule);
     }
+
+    private Integer countFanOut(){
+        return typesInModule.stream()
+                .mapToInt(type -> type.getDependencyTypes().size())
+                .sum();
+    }
+
+    private Integer countFanIn(){
+        return null;//need update
+    }
+
+    private Integer countClassEnumNum(){
+        return (int)typesInModule.stream().filter(type-> type.getType() == CLASS || type.getType() == ENUM ).count();
+    }
+
 
     public Integer getInstability(){
         if(instability == null){
-            instability = Objects.requireNonNull(fanOutClasses).size() /
-                    (Objects.requireNonNull(fanInClasses).size() + fanOutClasses.size());
+            instability = countFanOut() /
+                    (countFanIn() + countFanOut());
         }
 
         return instability;
@@ -35,7 +48,7 @@ public class ModuleDependencyInfo {
 
     public Integer getAbstractness(){
         if(abstractness == null){
-            abstractness = Objects.requireNonNull(numOfAbsAndInterfaceClasses) / Objects.requireNonNull(numOfClasses);
+            abstractness = (typesInModule.size() - countClassEnumNum()) / countClassEnumNum();
         }
 
         return abstractness;

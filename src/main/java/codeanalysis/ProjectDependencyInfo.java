@@ -2,11 +2,21 @@ package codeanalysis;
 
 import java.util.List;
 
-public class ProjectDependencyInfo {
+class ProjectDependencyInfo {
     private String projectName;
 
-    private List<ModuleDependencyInfo> internalModuleInfo;
-    private List<ModuleDependencyInfo> thirdPartyModuleInfo;
+    private static final List<String> internalClasses;
+    private static final List<String> thirdPartyClasses;
+
+    static {
+        internalClasses = null;
+        thirdPartyClasses = null;
+    }
+
+
+
+
+    private ProjectDependencyInfo(){}
 
 
 }
