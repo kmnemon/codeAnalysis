@@ -3,8 +3,6 @@ package codeanalysis;
 import java.util.List;
 
 class ProjectDependencyInfo {
-    private String projectName;
-
     private static final List<String> internalClasses;
     private static final List<String> thirdPartyClasses;
 
