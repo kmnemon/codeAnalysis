@@ -1,6 +1,6 @@
-util/FilePathServiceImplTests.java
- util.FilePathServiceImplTests
 codeanalysis/ProjectDependencyInfoTests.java
  codeanalysis.ProjectDependencyInfoTests
 util/ClassAnalysisTests.java
  util.ClassAnalysisTests
+util/FilePathServiceTests.java
+ util.FilePathServiceTests

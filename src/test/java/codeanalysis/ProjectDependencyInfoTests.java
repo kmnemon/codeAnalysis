@@ -3,7 +3,7 @@ package codeanalysis;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static util.FilePathServiceImpl.getFilesPathInProject;
+import static util.FilePathService.getFilesPathInProject;
 
 public class ProjectDependencyInfoTests {
     @Test

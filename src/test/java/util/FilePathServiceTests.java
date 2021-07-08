@@ -4,19 +4,21 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static util.FilePathServiceImpl.classPathToClassName;
+import static util.FilePathService.classPathToClassName;
 
-public class FilePathServiceImplTests {
+public class FilePathServiceTests {
     @Test
-    public void getFilesPathTests(){
-        List<Path> dirs = FilePathServiceImpl.getFilesPathInProject("/Users/keliu/IdeaProjects/acquireIP", "java");
+    public void getFilesPathInProjectTests(){
+        List<Path> dirs = FilePathService.getFilesPathInProject("/Users/keliu/IdeaProjects/acquireIP", "java");
         assertEquals(5, dirs.size());
 
-        dirs = FilePathServiceImpl.getJavaFilesPathInProjectByCurrentPath();
+        dirs = FilePathService.getFilesPathInProject("/Users/keliu/tmp", "java");
+        assertEquals(0, dirs.size());
+
+        dirs = FilePathService.getJavaFilesPathInProjectByCurrentPath();
         assertTrue(dirs.size()>6);
     }
 

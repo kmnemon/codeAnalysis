@@ -8,9 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static util.FilePathServiceImpl.*;
+import static util.FilePathService.*;
 
 class ProjectDependencyInfo {
     private static final Logger LOG = LoggerFactory.getLogger(ProjectDependencyInfo.class);
@@ -61,10 +60,6 @@ class ProjectDependencyInfo {
         return null;
     }
 
-    public static void main(String[] args) {
-        ProjectDependencyInfo project = new ProjectDependencyInfo(getJavaFilesPathInProjectByCurrentPath());
-        project.setModulesInProject();
 
-    }
 
 }
