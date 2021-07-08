@@ -8,9 +8,10 @@ import java.util.stream.Collectors;
 import static codeanalysis.ClassType.*;
 
 public class ClassAnalysis {
-    public static List<String> getImportCLass(List<String> clsContent){
+    public static List<String> getImportPaicCLass(List<String> clsContent){
         return clsContent.stream()
                 .filter(line-> line.contains("import"))
+                .filter(line-> line.contains("paic"))
                 .collect(Collectors.toList());
     }
 

@@ -19,7 +19,7 @@ class ProjectDependencyInfo {
     private final List<ModuleDependencyInfo> modulesInProject;
 
     private final List<String> internalClasses;
-    private List<String> importClasses;
+    private List<String> importPaicClasses;
 
 
     public ProjectDependencyInfo(List<Path> filesPathInProject){
@@ -38,11 +38,19 @@ class ProjectDependencyInfo {
 
 
 
-//            try {
-//                typeContent = Files.readAllLines(path);
-//            } catch (IOException e){
-//                LOG.info("read java file content failed" + path.toString() + ":" + e.getMessage());
-//            }
+    }
+
+    public void setClassesInProject() {
+        filesPathInProject.stream()
+                .map( path->{
+                    try{
+                        return Files.readAllLines(path);
+                    }catch (IOException e){
+                        LOG.info("read java file content failed" + path.toString() + ":" + e.getMessage());
+                    }
+                    return null;
+                        })
+                .count();
 
 
     }

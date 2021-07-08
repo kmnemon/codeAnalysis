@@ -28,20 +28,21 @@ public class ClassAnalysisTests {
     }
 
     @Test
-    public void getImportCLassTests(){
+    public void getImportPaicCLassTests(){
         List<String> testContent = new ArrayList<>();
         testContent.add("adfasdfa");
         testContent.add("package com.aaa.bbb.ccc");
         testContent.add("import aaa.bbb");
         testContent.add("import ccc.ddd");
         testContent.add("package com.aaa.bbb.ccc1");
+        testContent.add("import com.paic.xxx.xxx");
 
-        assertEquals(2, getImportCLass(testContent).size());
-        assertEquals("import aaa.bbb", getImportCLass(testContent).get(0));
+        assertEquals(1, getImportPaicCLass(testContent).size());
+        assertEquals("import com.paic.xxx.xxx", getImportPaicCLass(testContent).get(0));
 
         List<String> noContents = new ArrayList<>();
         noContents.add("dfsdf");
-        assertEquals(0, getImportCLass(noContents).size());
+        assertEquals(0, getImportPaicCLass(noContents).size());
     }
 
     @Test
