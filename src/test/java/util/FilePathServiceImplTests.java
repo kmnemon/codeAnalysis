@@ -1,7 +1,6 @@
 package util;
 
 import org.junit.jupiter.api.Test;
-import util.FilePathServiceImpl;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -9,14 +8,25 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static util.FilePathServiceImpl.classPathToClassName;
 
 public class FilePathServiceImplTests {
     @Test
-    public void getFilesPath(){
-        Optional<List<Path>> dirs = FilePathServiceImpl.getFilesPathInProject("/Users/keliu/IdeaProjects/acquireIP", "java");
-        assertEquals(5, dirs.get().size());
+    public void getFilesPathTests(){
+        List<Path> dirs = FilePathServiceImpl.getFilesPathInProject("/Users/keliu/IdeaProjects/acquireIP", "java");
+        assertEquals(5, dirs.size());
 
         dirs = FilePathServiceImpl.getJavaFilesPathInProjectByCurrentPath();
-        assertTrue(dirs.get().size()>6);
+        assertTrue(dirs.size()>6);
     }
+
+    @Test
+    public void classPathToClassNameTests(){
+        Path path = Path.of("/test/abc/df");
+        assertEquals("test.abc.df", classPathToClassName(path));
+    }
+
+
+
+
 }

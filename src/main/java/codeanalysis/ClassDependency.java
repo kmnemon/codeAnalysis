@@ -1,16 +1,19 @@
 package codeanalysis;
 
-import static codeanalysis.TypeDependency.ClassType.CLASS;
+import java.util.List;
+
+import static codeanalysis.ClassType.CLASS_TYPE;
+
 
 class ClassDependency extends TypeDependency {
-    ClassDependency(String typeNameWithFullPath, String packageNameWithFullPath){
-        super(typeNameWithFullPath, packageNameWithFullPath);
+    ClassDependency(String typeNameWithFullPath, String packageNameWithFullPath, List<String> typeContent){
+        super(typeNameWithFullPath, packageNameWithFullPath, typeContent);
     }
 
 
     @Override
     ClassType getType(){
-        return CLASS;
+        return CLASS_TYPE;
     }
 
 }

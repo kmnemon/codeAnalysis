@@ -12,18 +12,15 @@ public class Test {
 
     public static void main(String[] args) throws Exception{
         try {
-            Path test = Paths.get("");
+            Path test = Paths.get("/Users/keliu/tmp");
 //            System.out.println(test.toAbsolutePath());
             //        Directories.refreshTestDir();
 //        Directories.populateTestDir();
             // Creating a *directory*, not a file:
 //            Files.createDirectory(test.resolve("dir.tmp"));
+            System.out.println(test);
+            System.out.println(test.getParent());
 
-            PathMatcher matcher = FileSystems.getDefault()
-                    .getPathMatcher("glob:**/*.{java}");
-            Files.walk(test)
-                    .filter(matcher::matches)
-                    .forEach(System.out::println);
             System.out.println("***************");
         }catch (InvalidPathException  e){
             System.out.println("waht");

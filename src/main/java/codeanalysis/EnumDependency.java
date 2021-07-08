@@ -1,14 +1,17 @@
 package codeanalysis;
 
-import static codeanalysis.TypeDependency.ClassType.ENUM;
+import java.util.List;
+
+import static codeanalysis.ClassType.ENUM_TYPE;
+
 
 public class EnumDependency extends TypeDependency{
-    EnumDependency(String typeNameWithFullPath, String packageNameWithFullPath){
-        super(typeNameWithFullPath, packageNameWithFullPath);
+    EnumDependency(String typeNameWithFullPath, String packageNameWithFullPath, List<String> typeContent){
+        super(typeNameWithFullPath, packageNameWithFullPath, typeContent);
     }
 
     @Override
     ClassType getType(){
-        return ENUM;
+        return ENUM_TYPE;
     }
 }

@@ -2,9 +2,9 @@ package codeanalysis;
 
 import java.util.List;
 
+import static codeanalysis.ClassType.CLASS_TYPE;
+import static codeanalysis.ClassType.ENUM_TYPE;
 
-import static codeanalysis.TypeDependency.ClassType.CLASS;
-import static codeanalysis.TypeDependency.ClassType.ENUM;
 
 class ModuleDependencyInfo {
     private String moduleNameWithFullPath;
@@ -15,7 +15,7 @@ class ModuleDependencyInfo {
 
     private ModuleDependencyInfo(String moduleNameWithFullPath, List<TypeDependency> typesInModule){
         this.moduleNameWithFullPath = moduleNameWithFullPath;
-        this.typesInModule = List.copyOf(typesInModule);
+        this.typesInModule = typesInModule;
     }
 
     public static ModuleDependencyInfo create(String moduleName, List<TypeDependency> typesInModule){
@@ -33,7 +33,7 @@ class ModuleDependencyInfo {
     }
 
     private Integer countClassEnumNum(){
-        return (int)typesInModule.stream().filter(type-> type.getType() == CLASS || type.getType() == ENUM ).count();
+        return (int)typesInModule.stream().filter(type-> type.getType() == CLASS_TYPE || type.getType() == ENUM_TYPE).count();
     }
 
 
