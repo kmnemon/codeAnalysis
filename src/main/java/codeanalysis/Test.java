@@ -13,7 +13,6 @@ public class Test {
     private int a;
 
     public static void main(String[] args) throws Exception{
-        List<String> l = new ArrayList<>();
-        l.stream().forEach(System.out::println);
+
     }
 }

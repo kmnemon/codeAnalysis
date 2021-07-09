@@ -1,24 +1,26 @@
-codeanalysis/ClassType.java
- codeanalysis.ClassType
-codeanalysis/TypeDependency.java
- codeanalysis.TypeDependency
-codeanalysis/InterfaceDependency.java
- codeanalysis.InterfaceDependency
+codeanalysis/TypeInfo.java
+ codeanalysis.TypeInfo
+codeanalysis/EnumInfo.java
+ codeanalysis.EnumInfo
+codeanalysis/ModuleDependency.java
+ codeanalysis.ModuleDependency
 codeanalysis/Test.java
  codeanalysis.Test
-codeanalysis/ModuleDependencyInfo.java
- codeanalysis.ModuleDependencyInfo
-codeanalysis/EnumDependency.java
- codeanalysis.EnumDependency
-codeanalysis/ClassDependency.java
- codeanalysis.ClassDependency
-codeanalysis/AbstractDependency.java
- codeanalysis.AbstractDependency
-util/ClassAnalysis.java
- util.ClassAnalysis
+codeanalysis/InterfaceInfo.java
+ codeanalysis.InterfaceInfo
+codeanalysis/ClassInfo.java
+ codeanalysis.ClassInfo
+codeanalysis/AbstractInfo.java
+ codeanalysis.AbstractInfo
+codeanalysis/JavaType.java
+ codeanalysis.JavaType
 codeanalysis/FileInput.java
  codeanalysis.FileInput
 util/FilePathService.java
  util.FilePathService
-codeanalysis/ProjectDependencyInfo.java
- codeanalysis.ProjectDependencyInfo
+codeanalysis/ProjectDependency.java
+ codeanalysis.ProjectDependency
+codeanalysis/TypeAnalysis.java
+ codeanalysis.TypeAnalysis
+codeanalysis/ProjectInfo.java
+ codeanalysis.ProjectInfo

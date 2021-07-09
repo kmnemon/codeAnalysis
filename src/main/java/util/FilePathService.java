@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -35,12 +36,24 @@ public class FilePathService {
         return getFilesPathInProject("", "java");
     }
 
-    public static String classPathToClassName(Path path){
+    public static String typePathToTypeName(Path path){
+        return path.getFileName().toString();
+    }
+
+    public static String typePathToFullTypeName(Path path) {
         return path.toString().replace("/", ".").substring(1);
     }
 
-    public static List<String> classesPathToClassesName(List<Path> paths){
-        return paths.stream().map(FilePathService::classPathToClassName).collect(toList());
+    public static List<String> typesPathToFullTypesName(List<Path> paths){
+        return paths.stream()
+                .map(FilePathService::typePathToFullTypeName)
+                .collect(Collectors.toList());
     }
+
+
+
+//    public static List<String> classesPathToClassesName(List<Path> paths){
+//        return paths.stream().map(FilePathService::typePathToTypeName).collect(toList());
+//    }
 
 }

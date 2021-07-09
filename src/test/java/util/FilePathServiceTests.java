@@ -7,7 +7,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static util.FilePathService.classPathToClassName;
+import static util.FilePathService.typePathToFullTypeName;
+import static util.FilePathService.typePathToTypeName;
 
 public class FilePathServiceTests {
     @Test
@@ -23,9 +24,15 @@ public class FilePathServiceTests {
     }
 
     @Test
-    public void classPathToClassNameTests(){
-        Path path = Path.of("/test/abc/df");
-        assertEquals("test.abc.df", classPathToClassName(path));
+    public void typePathToTypeNameTests(){
+        Path path = Path.of("/test/abc/df.java");
+        assertEquals("df.java", typePathToTypeName(path));
+    }
+
+    @Test
+    public void typePathToFullTypeNameTests(){
+        Path path = Path.of("/test/abc/df.java");
+        assertEquals("test.abc.df.java", typePathToFullTypeName(path));
     }
 
 

@@ -1,6 +1,6 @@
-codeanalysis/ProjectDependencyInfoTests.java
- codeanalysis.ProjectDependencyInfoTests
-util/ClassAnalysisTests.java
- util.ClassAnalysisTests
+codeanalysis/ProjectInfoTests.java
+ codeanalysis.ProjectInfoTests
 util/FilePathServiceTests.java
  util.FilePathServiceTests
+codeanalysis/TypeAnalysisTests.java
+ codeanalysis.TypeAnalysisTests

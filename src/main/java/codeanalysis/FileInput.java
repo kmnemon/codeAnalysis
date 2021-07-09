@@ -9,9 +9,8 @@ public class FileInput {
 
     public static void main(String[] args) {
         List<Path> javaFiles = getJavaFilesPathInProjectByCurrentPath();
-        ProjectDependencyInfo project = new ProjectDependencyInfo(javaFiles);
+        ProjectDependency projectDep = new ProjectDependency(javaFiles);
 
-        project.setModulesInProject();
 
     }
 }
