@@ -12,7 +12,7 @@ class ProjectInfo {
     private static final Logger LOG = LoggerFactory.getLogger(ProjectInfo.class);
 
     private final List<Path> filesPathInProject;
-    private final Map<String, List<TypeInfo>> modulesInProject;
+    protected final Map<String, List<TypeInfo>> modulesInProject;
 
     protected ProjectInfo(List<Path> filesPathInProject){
         this.filesPathInProject = filesPathInProject;

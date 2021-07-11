@@ -15,12 +15,6 @@ abstract class TypeInfo {
         this.typeContent = typeContent;
     }
 
-    public List<String> calcAndGetDepTypes(){
-
-
-        return new ArrayList<>();
-    }
-
     public String getTypeName() {
         return typeName;
     }

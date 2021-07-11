@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="codeanalysis.TypeAnalysisTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-09T09:40:24" hostname="Kes-MacBook-Pro.local" time="0.035">
+<testsuite name="codeanalysis.TypeAnalysisTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-11T03:09:32" hostname="kes-iMac.local" time="0.025">
   <properties/>
-  <testcase name="findImportPaicTypesPerTypeTests()" classname="codeanalysis.TypeAnalysisTests" time="0.035"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="calcAndGetDepTypesTests()" classname="codeanalysis.TypeAnalysisTests" time="0.025"/>
+  <system-out><![CDATA[aaa
+bbb
+ccc
+sdfsdf
+xxx
+7yy
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

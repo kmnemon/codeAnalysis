@@ -3,48 +3,79 @@ package codeanalysis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
-import static codeanalysis.JavaType.CLASS_TYPE;
-import static codeanalysis.JavaType.ENUM_TYPE;
+import static codeanalysis.TypeAnalysis.calcAndGetDepTypesToOtherModule;
 
 public class ModuleDependency{
     private static final Logger LOG = LoggerFactory.getLogger(ModuleDependency.class);
 
-    public static Integer calcInstability(List<TypeInfo> typesInModule) {
-        try {
-            int fanOut = countFanOut(typesInModule);
-            return fanOut / (countFanIn(typesInModule) + fanOut);
-        } catch (ArithmeticException e) {
-            LOG.error("fanIn + Out is zero: " + e.getMessage());
-        }
-        return null;
+//    public static Integer calcInstability(List<TypeInfo> typesInModule) {
+//        try {
+//            int fanOut = countFanOut(typesInModule);
+//            return fanOut / (countFanIn(typesInModule) + fanOut);
+//        } catch (ArithmeticException e) {
+//            LOG.error("fanIn + Out is zero: " + e.getMessage());
+//        }
+//        return null;
+//    }
+
+
+    private static int countFanOut(List<TypeInfo> publicTypesInModule, List<String> publicAndPaicTypesFull){
+        List<String> publicAndPaicTypesOtherFull = getTypesInOtherModule(publicTypesInModule, publicAndPaicTypesFull);
+        return publicTypesInModule.stream()
+                .flatMap(type -> calcAndGetDepTypesToOtherModule(type, publicAndPaicTypesOtherFull).stream())
+                .collect(Collectors.toSet())
+                .size();
     }
 
-    private static int countFanOut(List<TypeInfo> typesInModule){
-        return typesInModule.stream()
-                .mapToInt(type -> type.calcAndGetDepTypes().size())
+    private static List<String> getTypesInOtherModule(List<TypeInfo> publicTypesInModule, List<String> publicAndPaicTypesFull){
+        return publicAndPaicTypesFull.stream()
+                .filter(typeStr-> !containTypesInModule(typeStr, publicTypesInModule))
+                .collect(Collectors.toList());
+    }
+
+    private static boolean containTypesInModule(String typeStr, List<TypeInfo> publicTypesInModule){
+        return publicTypesInModule.stream()
+                .flatMap(typeInfo->typeInfo.getTypeContent().stream())
+                .anyMatch(typeStr::contains);
+    }
+
+//    private static int countFanIn(List<TypeInfo> publicTypesInModule, List<String> publicAndPaicTypesFull){
+//        Map<String, AtomicInteger> fanIn = new HashMap<>();
+//
+//
+//
+//
+//    }
+
+
+    public static Integer calcAbstractness(List<TypeInfo> publicTypesInModule){
+        int absClassCount = (int)publicTypesInModule.stream()
+                .mapToInt(type->TypeAnalysis.abstractCount(type))
                 .sum();
-    }
 
-    private static int countFanIn(List<TypeInfo> typesInModule){
-        return 1;//need update
-    }
+        int interfaceCount = (int)publicTypesInModule.stream()
+                .mapToInt(type->TypeAnalysis.interfaceCount(type))
+                .sum();
 
+        int classAndEnumCount = (int)publicTypesInModule.stream()
+                .mapToInt(type->TypeAnalysis.classAndEnumCount(type))
+                .sum();
 
-    public static Integer calcAbstractness(List<TypeInfo> typesInModule){
         try {
-            int nc = typesInModule.size();
-            return (nc - countClassEnumNum(typesInModule)) / nc;
+            int nc = absClassCount + interfaceCount + classAndEnumCount;
+            return (nc - classAndEnumCount) / nc;
         } catch (ArithmeticException e){
             LOG.error("nc is zero: " + e.getMessage());
         }
+
         return null;
     }
 
-    private static int countClassEnumNum(List<TypeInfo> typesInModule){
-        return (int)typesInModule.stream()
-                .filter(type-> type.getType() == CLASS_TYPE || type.getType() == ENUM_TYPE)
-                .count();
-    }
+
 }

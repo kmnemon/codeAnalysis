@@ -1,26 +1,26 @@
+util/FilePathService.java
+ util.FilePathService
+codeanalysis/JavaType.java
+ codeanalysis.JavaType
 codeanalysis/TypeInfo.java
  codeanalysis.TypeInfo
-codeanalysis/EnumInfo.java
- codeanalysis.EnumInfo
+codeanalysis/FileInput.java
+ codeanalysis.FileInput
 codeanalysis/ModuleDependency.java
  codeanalysis.ModuleDependency
-codeanalysis/Test.java
- codeanalysis.Test
-codeanalysis/InterfaceInfo.java
- codeanalysis.InterfaceInfo
+codeanalysis/ProjectInfo.java
+ codeanalysis.ProjectInfo
 codeanalysis/ClassInfo.java
  codeanalysis.ClassInfo
 codeanalysis/AbstractInfo.java
  codeanalysis.AbstractInfo
-codeanalysis/JavaType.java
- codeanalysis.JavaType
-codeanalysis/FileInput.java
- codeanalysis.FileInput
-util/FilePathService.java
- util.FilePathService
-codeanalysis/ProjectDependency.java
- codeanalysis.ProjectDependency
+codeanalysis/InterfaceInfo.java
+ codeanalysis.InterfaceInfo
 codeanalysis/TypeAnalysis.java
  codeanalysis.TypeAnalysis
-codeanalysis/ProjectInfo.java
- codeanalysis.ProjectInfo
+codeanalysis/EnumInfo.java
+ codeanalysis.EnumInfo
+codeanalysis/ProjectDependency.java
+ codeanalysis.ProjectDependency
+codeanalysis/Test.java
+ codeanalysis.Test

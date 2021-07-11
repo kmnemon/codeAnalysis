@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static codeanalysis.JavaType.CLASS_TYPE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static codeanalysis.TypeAnalysis.*;
 
@@ -28,22 +26,17 @@ public class TypeAnalysisTests {
     }
 
     @Test
-    public void findImportPaicTypesPerTypeTests(){
-        List<String> testContent = new ArrayList<>();
-        testContent.add("adfasdfa");
-        testContent.add("package com.aaa.bbb.ccc");
-        testContent.add(" import  aaa.bbb");
-        testContent.add("import ccc.ddd");
-        testContent.add("package com.aaa.bbb.ccc1");
-        testContent.add("import  com.paic.xxx.xxx");
+    public void calcAndGetDepTypesTests(){
+        List<String> aa = new ArrayList<>();
+        aa.add("aaa bbb ccc");
+        aa.add("sdfsdf");
+        aa.add("xxx 7yy");
 
-        assertEquals(1, findImportPaicTypesPerType(testContent).size());
-        assertEquals("com.paic.xxx.xxx", findImportPaicTypesPerType(testContent).get(0));
+//        calcAndGetDepTypes(aa);
 
-        List<String> noContents = new ArrayList<>();
-        noContents.add("dfsdf");
-        assertEquals(0, findImportPaicTypesPerType(noContents).size());
     }
+
+
 
 
 }
