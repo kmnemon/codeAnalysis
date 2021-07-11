@@ -56,15 +56,15 @@ public class ModuleDependency{
 
     public static Integer calcAbstractness(List<TypeInfo> publicTypesInModule){
         int absClassCount = (int)publicTypesInModule.stream()
-                .mapToInt(type->TypeAnalysis.abstractCount(type))
+                .mapToInt(TypeAnalysis::abstractCount)
                 .sum();
 
         int interfaceCount = (int)publicTypesInModule.stream()
-                .mapToInt(type->TypeAnalysis.interfaceCount(type))
+                .mapToInt(TypeAnalysis::interfaceCount)
                 .sum();
 
         int classAndEnumCount = (int)publicTypesInModule.stream()
-                .mapToInt(type->TypeAnalysis.classAndEnumCount(type))
+                .mapToInt(TypeAnalysis::classAndEnumCount)
                 .sum();
 
         try {
