@@ -6,33 +6,28 @@ import org.slf4j.LoggerFactory;
 import java.nio.file.Path;
 import java.util.*;
 
+import static util.FilePathService.getJavaFilesPathInProjectByCurrentPath;
+
 
 class ProjectInfo {
     private static final Logger LOG = LoggerFactory.getLogger(ProjectInfo.class);
 
-    private final List<Path> filesPathInProject;
     protected final Map<ModuleInfo, List<TypeInfo>> modulesInProject;
+    protected BasicInfo basicInfo;
 
-    public ProjectInfo(List<Path> filesPathInProject){
-        this.filesPathInProject = filesPathInProject;
+    public ProjectInfo(BasicInfo basicInfo){
         this.modulesInProject = new HashMap<>();
+        this.basicInfo = basicInfo;
         initModulesInProject();
     }
 
     public void initModulesInProject(){
-        if( filesPathInProject.isEmpty())
-            return;
-
-        filesPathInProject.stream()
-                .map(TypeAnalysis::initType)
-                .filter(Objects::nonNull)
-                .peek(System.out::println)
-                .forEach(this::initModules);
+        basicInfo.getAllTypesInfo().forEach(this::initModules);
     }
 
     private void initModules(TypeInfo type){
-            modulesInProject.computeIfAbsent(new ModuleInfo(type.getPackageName()), k -> new ArrayList<>());
-            modulesInProject.get(new ModuleInfo(type.getPackageName())).add(type);
+            modulesInProject.computeIfAbsent(new ModuleInfo(type.getPackageName(), basicInfo), k -> new ArrayList<>());
+            modulesInProject.get(new ModuleInfo(type.getPackageName(), basicInfo)).add(type);
     }
 
     public Map<ModuleInfo, List<TypeInfo>> getModulesInProject() {

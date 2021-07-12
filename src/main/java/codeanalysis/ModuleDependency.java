@@ -15,15 +15,14 @@ public class ModuleDependency extends ModuleInfo{
     private static final Logger LOG = LoggerFactory.getLogger(ModuleDependency.class);
 
     private final Integer moduleAbstract;
+    BasicInfo basicInfo;
 //    private final Integer moduleInstability;
 
-//    private final List<String> publicAndPaicTypesFull;
 
-    ModuleDependency(String moduleName, List<TypeInfo> publicTypesInModule, List<String> publicAndPaicTypesFull){
-        super(moduleName, publicAndPaicTypesFull);
+    ModuleDependency(String moduleName, BasicInfo basicInfo, List<TypeInfo> publicTypesInModule){
+        super(moduleName, basicInfo);
         this.moduleAbstract = calcModuleAbstractness(publicTypesInModule);
 //        this.moduleInstability = calcModuleInstability(publicTypesInModule);
-        this.publicAndPaicTypesFull = publicAndPaicTypesFull;
     }
 
 

@@ -6,14 +6,12 @@ import java.util.stream.Collectors;
 
 public class ModuleInfo {
     private final String moduleName;
-    private final List<String> publicAndPaicTypesFull;
+    protected BasicInfo basicInfo;
 
-    ModuleInfo(String moduleName, List<String> publicAndPaicTypesFull){
+    ModuleInfo(String moduleName, BasicInfo basicInfo){
         this.moduleName = moduleName;
-        this.publicAndPaicTypesFull = publicAndPaicTypesFull;
+        this.basicInfo = basicInfo;
     }
-
-
 
     @Override
     public boolean equals(Object o){
@@ -32,7 +30,7 @@ public class ModuleInfo {
     }
 
     List<String> getTypesFullInOtherModule(List<TypeInfo> publicTypesInModuleExclude){
-        return publicAndPaicTypesFull.stream()
+        return basicInfo.getPublicAndPaicTypesFull().stream()
                 .filter(typeStr-> !ModuleInfo.containTypesInModule(typeStr, publicTypesInModuleExclude))
                 .collect(Collectors.toUnmodifiableList());
     }

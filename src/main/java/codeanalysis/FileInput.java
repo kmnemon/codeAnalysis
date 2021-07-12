@@ -9,7 +9,8 @@ public class FileInput {
 
     public static void main(String[] args) {
         List<Path> javaFiles = getJavaFilesPathInProjectByCurrentPath();
-        ProjectDependency projectDep = new ProjectDependency(javaFiles);
+        BasicInfo basicInfo = new BasicInfo(javaFiles);
+        ProjectDependency projectDep = new ProjectDependency(basicInfo);
 
 
 

@@ -1,15 +1,19 @@
+util/FilePathService.java
+ util.FilePathService
+codeanalysis/TypeInfo.java
+ codeanalysis.TypeInfo
 codeanalysis/FileInput.java
  codeanalysis.FileInput
 codeanalysis/ModuleDependency.java
  codeanalysis.ModuleDependency
-codeanalysis/TypeInfo.java
- codeanalysis.TypeInfo
 codeanalysis/Test.java
  codeanalysis.Test
-util/FilePathService.java
- util.FilePathService
+codeanalysis/BasicInfo.java
+ codeanalysis.BasicInfo
 util/TextService.java
  util.TextService
+util/BasicTypeService.java
+ util.BasicTypeService
 codeanalysis/TypeAnalysis.java
  codeanalysis.TypeAnalysis
 codeanalysis/ModuleInfo.java

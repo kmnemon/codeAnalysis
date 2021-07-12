@@ -18,7 +18,8 @@ public class ProjectInfoTests {
     @BeforeEach
     public void initProject(){
         List<Path> filesPathInProject = getFilesPathInProject("/Users/keliu/tmp/test_project", "java");
-        p = new ProjectInfo(filesPathInProject);
+        BasicInfo basicInfo = new BasicInfo(filesPathInProject);
+        p = new ProjectInfo(basicInfo);
     }
 
     @Test

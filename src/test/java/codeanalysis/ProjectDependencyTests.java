@@ -1,16 +1,26 @@
 package codeanalysis;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static codeanalysis.ProjectDependency.findAllimportPaicTypes;
+import static util.BasicTypeService.findAllimportPaicTypes;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static util.FilePathService.getJavaFilesPathInProjectByCurrentPath;
 
 public class ProjectDependencyTests {
+    static BasicInfo basicInfo;
+    @BeforeAll
+    static void initBasicInfo(){
+        List<Path> javaFiles = getJavaFilesPathInProjectByCurrentPath();
+        basicInfo = new BasicInfo(javaFiles);
+    }
+
     @Test
     void findAllimportPaicTypesTests(){
         List<String> con1 = Arrays.asList("asdf","import com.paic.aaa");
@@ -27,18 +37,10 @@ public class ProjectDependencyTests {
         TypeInfo t5 = new TypeInfo("x5", "packE", con5);
         TypeInfo t6 = new TypeInfo("x6", "packF", con6);
 
-        List<TypeInfo> ti1 = Arrays.asList(t1,t2);
-        List<TypeInfo> ti2 = Arrays.asList(t3,t4);
-        List<TypeInfo> ti3 = Arrays.asList(t5,t6);
+        List<TypeInfo> ti = Arrays.asList(t1,t2,t3,t4,t5,t6);
 
-        Map<ModuleInfo, List<TypeInfo>> modulesInProject = new HashMap<>();
-        modulesInProject.put(new ModuleInfo("x1"), ti1);
-        modulesInProject.put(new ModuleInfo("x2"), ti2);
-        modulesInProject.put(new ModuleInfo("x3"), ti3);
-
-
-        assertEquals(3, findAllimportPaicTypes(modulesInProject).size());
-        assertEquals("com.paic.aaa", findAllimportPaicTypes(modulesInProject).get(0));
+        assertEquals(3, findAllimportPaicTypes(ti).size());
+        assertEquals("com.paic.aaa", findAllimportPaicTypes(ti).get(0));
 
     }
 }
