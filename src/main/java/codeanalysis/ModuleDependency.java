@@ -11,22 +11,13 @@ import java.util.stream.Collectors;
 
 import static codeanalysis.TypeAnalysis.subTypesDepOtherModuleCount;
 
-public class ModuleDependency extends ModuleInfo{
+public class ModuleDependency{
     private static final Logger LOG = LoggerFactory.getLogger(ModuleDependency.class);
 
-    private final Integer moduleAbstract;
-    BasicInfo basicInfo;
-//    private final Integer moduleInstability;
+    ModuleDependency(){ }
 
 
-    ModuleDependency(String moduleName, BasicInfo basicInfo, List<TypeInfo> publicTypesInModule){
-        super(moduleName, basicInfo);
-        this.moduleAbstract = calcModuleAbstractness(publicTypesInModule);
-//        this.moduleInstability = calcModuleInstability(publicTypesInModule);
-    }
-
-
-//    private Integer calcModuleInstability(List<TypeInfo> publicTypesInModule) {
+//    private static Integer calcModuleInstability(List<TypeInfo> publicTypesInModule) {
 //        try {
 //            int moduleFanOut = calcModuleFanOut(publicTypesInModule);
 //            return moduleFanOut / (calc..(publicTypesInModule) + moduleFanOut);
@@ -37,7 +28,7 @@ public class ModuleDependency extends ModuleInfo{
 //    }
 
 
-//    private int calcModuleFanOut(List<TypeInfo> publicTypesInModule){
+//    private static int calcModuleFanOut(List<TypeInfo> publicTypesInModule){
 //        List<String> publicAndPaicTypesOtherFull = getTypesFullInOtherModule(publicTypesInModule);
 //        return publicTypesInModule.stream()
 //                .mapToInt(typeInfo -> subTypesDepOtherModuleCount(typeInfo, publicAndPaicTypesOtherFull))
@@ -53,7 +44,7 @@ public class ModuleDependency extends ModuleInfo{
 //    }
 
 
-    private Integer calcModuleAbstractness(List<TypeInfo> publicTypesInModule){
+    private static Integer calcModuleAbstractness(List<TypeInfo> publicTypesInModule){
         int absClassCount = publicTypesInModule.stream()
                 .mapToInt(TypeAnalysis::abstractCount)
                 .sum();
@@ -76,13 +67,5 @@ public class ModuleDependency extends ModuleInfo{
         return null;
     }
 
-
-    public Integer getModuleAbstract() {
-        return moduleAbstract;
-    }
-
-//    public Integer getModuleInstability() {
-//        return moduleInstability;
-//    }
 
 }
