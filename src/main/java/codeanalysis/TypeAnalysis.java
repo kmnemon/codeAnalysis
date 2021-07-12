@@ -2,16 +2,16 @@ package codeanalysis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import util.TextService;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
 import static util.FilePathService.typePathToTypeName;
+import static util.TextService.linesToWords;
 
 public class TypeAnalysis {
     private static final Logger LOG = LoggerFactory.getLogger(TypeAnalysis.class);
@@ -27,22 +27,11 @@ public class TypeAnalysis {
         try {
             List<String> typeContent = Files.readAllLines(path).stream()
                     .filter( line-> !(line.contains("//") || line.contains("/*") || line.contains("*/")) )
-                    .collect(Collectors.toList());
-
+                    .collect(Collectors.toUnmodifiableList());
             String packageName = getPackageName(typeContent);
             String typeName = typePathToTypeName(path);
 
-            for (String line : typeContent){
-                if (line.contains("interface " + typeName)){
-                    return new InterfaceInfo(typeName, packageName, typeContent);
-                }else if(line.contains("enum " + typeName)){
-                    return new EnumInfo(typeName, packageName, typeContent);
-                }else if(line.contains("abstract class " + typeName)){
-                    return new AbstractInfo(typeName, packageName, typeContent);
-                }else if(line.contains("class " + typeName)){
-                    return new ClassInfo(typeName, packageName, typeContent);
-                }
-            }
+            return new TypeInfo(typeName, packageName, typeContent);
 
         } catch (IOException e) {
             LOG.info("read java file content failed" + path.toString() + ":" + e.getMessage());
@@ -59,24 +48,33 @@ public class TypeAnalysis {
      * above dependency not include standard library,because standard libraries are stable
      *
      */
-    public static Set<String> calcAndGetDepTypesToOtherModule(TypeInfo typeInfo, List<String> publicAndPaicTypesOtherFull){
-        Set<String> words = typeInfo.getTypeContent().stream()
-                .flatMap(line-> Arrays.stream(line.split(" ")))
-                .collect(Collectors.toSet());
+    public static int subTypesDepOtherModuleCount(TypeInfo typeInfo, List<String> publicAndPaicTypesOtherFull){
+        if( typeInfo.getTypeContent().isEmpty()) {
+            LOG.info(typeInfo.getTypeName() + " is empty");
+            return 0;
+        }
+
+        Map<String, List<String>> subTypes = subTypeSplit(typeInfo);
+        if( subTypes.isEmpty()){
+            LOG.info("java file don't have types");
+            return 0;
+        }
+
+        return (int)subTypes.values().stream()
+                .map(subType-> isDepOtherTypes(subType, publicAndPaicTypesOtherFull))
+                .filter(item->item.equals(Boolean.TRUE))
+                .count();
+    }
+
+
+
+    public static boolean isDepOtherTypes(List<String> subType, List<String> publicAndPaicTypesOtherFull){
+        List<String> words = linesToWords(subType);
 
         return publicAndPaicTypesOtherFull.stream()
-                .filter(typeStr->containWords(typeStr, words))
-                .collect(Collectors.toSet());
-
+                .anyMatch(typeStr-> TextService.containWords(typeStr, words));
     }
 
-    public static boolean containWords(String typeStr, Set<String> words){
-        for(String word: words){
-            if(typeStr.contains(word))
-                return true;
-        }
-        return false;
-    }
 
     public static int interfaceCount(TypeInfo typeInfo){
         return (int)typeInfo.getTypeContent().stream()
@@ -104,19 +102,31 @@ public class TypeAnalysis {
     }
 
     public static Map<String, List<String>> subTypeSplit(TypeInfo typeInfo){
+        if( typeInfo.getTypeContent().isEmpty()) {
+            LOG.info(typeInfo.getTypeName() + " is empty");
+            return new HashMap<>();
+        }
+
+        final List<String> typeContent = typeInfo.getTypeContent();
+
         List<Integer> indexes = new ArrayList<>();
         Integer lineNum = 0;
-        for( String line : typeInfo.getTypeContent()){
+        for( String line : typeContent){
             if(isType(line))
                 indexes.add(lineNum);
             lineNum++;
         }
-        indexes.add(typeInfo.getTypeContent().size()-1);
+        indexes.add(typeContent.size()-1);
 
-        return null;
+        Map<String, List<String>> subTypes = new HashMap<>();
+        Integer fromIndex = indexes.get(0);
+        for(int i=1; i<indexes.size(); i++){
+            Integer toIndex = indexes.get(i);
+            subTypes.put(typeContent.get(fromIndex), typeContent.subList(fromIndex, toIndex));
+            fromIndex = toIndex;
+        }
 
-
-
+        return subTypes;
     }
 
 }

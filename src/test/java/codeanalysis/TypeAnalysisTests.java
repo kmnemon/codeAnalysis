@@ -1,14 +1,25 @@
 package codeanalysis;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static codeanalysis.TypeAnalysis.*;
 
 public class TypeAnalysisTests {
+    private static TypeInfo typeInfo;
+
+    @BeforeAll
+    public static void initTypeTests(){
+        Path path = Path.of("/Users/keliu/tmp/ProductServiceImpl.java");
+        typeInfo = initType(path);
+    }
+
     @Test
     public void getPackageNameTests(){
         List<String> testContent = new ArrayList<>();
@@ -33,6 +44,13 @@ public class TypeAnalysisTests {
         aa.add("xxx 7yy");
 
 //        calcAndGetDepTypes(aa);
+
+    }
+
+    @Test
+    public void subTypeSplitTests(){
+        Map<String, List<String>> subTypes = subTypeSplit(typeInfo);
+        assertEquals(3, subTypes.size());
 
     }
 

@@ -3,13 +3,13 @@ package codeanalysis;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class TypeInfo {
-    private String typeName;
-    private String packageName;
-    private List<String> typeContent;
+public class TypeInfo {
+    private final String typeName;
+    private final String packageName;
+    private final List<String> typeContent;
 
 
-    TypeInfo(String typeName, String packageName, List<String> typeContent){
+    public TypeInfo(String typeName, String packageName, List<String> typeContent){
         this.typeName = typeName;
         this.packageName = packageName;
         this.typeContent = typeContent;
@@ -26,7 +26,5 @@ abstract class TypeInfo {
     public List<String> getTypeContent() {
         return typeContent;
     }
-
-    abstract JavaType getType();
 
 }

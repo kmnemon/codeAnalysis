@@ -17,7 +17,7 @@ public class FilePathServiceTests {
         assertEquals(5, dirs.size());
 
         dirs = FilePathService.getFilesPathInProject("/Users/keliu/tmp", "java");
-        assertEquals(0, dirs.size());
+        assertEquals(1, dirs.size());
 
         dirs = FilePathService.getJavaFilesPathInProjectByCurrentPath();
         assertTrue(dirs.size()>6);

@@ -5,37 +5,39 @@ import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 class ProjectInfo {
     private static final Logger LOG = LoggerFactory.getLogger(ProjectInfo.class);
 
     private final List<Path> filesPathInProject;
-    protected final Map<String, List<TypeInfo>> modulesInProject;
+    protected final Map<ModuleInfo, List<TypeInfo>> modulesInProject;
 
-    protected ProjectInfo(List<Path> filesPathInProject){
+    public ProjectInfo(List<Path> filesPathInProject){
         this.filesPathInProject = filesPathInProject;
         this.modulesInProject = new HashMap<>();
-        setModulesInProject();
+        initModulesInProject();
     }
 
-    public void setModulesInProject(){
+    public void initModulesInProject(){
         if( filesPathInProject.isEmpty())
             return;
 
         filesPathInProject.stream()
                 .map(TypeAnalysis::initType)
                 .filter(Objects::nonNull)
+                .peek(System.out::println)
                 .forEach(this::initModules);
     }
 
-    public void initModules(TypeInfo type){
-            modulesInProject.computeIfAbsent(type.getPackageName(), k -> new ArrayList<>());
-            modulesInProject.get(type.getPackageName()).add(type);
-
+    private void initModules(TypeInfo type){
+            modulesInProject.computeIfAbsent(new ModuleInfo(type.getPackageName()), k -> new ArrayList<>());
+            modulesInProject.get(new ModuleInfo(type.getPackageName())).add(type);
     }
 
+    public Map<ModuleInfo, List<TypeInfo>> getModulesInProject() {
+        return modulesInProject;
+    }
 
     @Override
     public String toString(){

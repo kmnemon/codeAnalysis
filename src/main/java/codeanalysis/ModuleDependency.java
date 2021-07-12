@@ -9,15 +9,28 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static codeanalysis.TypeAnalysis.calcAndGetDepTypesToOtherModule;
+import static codeanalysis.TypeAnalysis.subTypesDepOtherModuleCount;
 
-public class ModuleDependency{
+public class ModuleDependency extends ModuleInfo{
     private static final Logger LOG = LoggerFactory.getLogger(ModuleDependency.class);
 
-//    public static Integer calcInstability(List<TypeInfo> typesInModule) {
+    private final Integer moduleAbstract;
+//    private final Integer moduleInstability;
+
+//    private final List<String> publicAndPaicTypesFull;
+
+    ModuleDependency(String moduleName, List<TypeInfo> publicTypesInModule, List<String> publicAndPaicTypesFull){
+        super(moduleName, publicAndPaicTypesFull);
+        this.moduleAbstract = calcModuleAbstractness(publicTypesInModule);
+//        this.moduleInstability = calcModuleInstability(publicTypesInModule);
+        this.publicAndPaicTypesFull = publicAndPaicTypesFull;
+    }
+
+
+//    private Integer calcModuleInstability(List<TypeInfo> publicTypesInModule) {
 //        try {
-//            int fanOut = countFanOut(typesInModule);
-//            return fanOut / (countFanIn(typesInModule) + fanOut);
+//            int moduleFanOut = calcModuleFanOut(publicTypesInModule);
+//            return moduleFanOut / (calc..(publicTypesInModule) + moduleFanOut);
 //        } catch (ArithmeticException e) {
 //            LOG.error("fanIn + Out is zero: " + e.getMessage());
 //        }
@@ -25,27 +38,14 @@ public class ModuleDependency{
 //    }
 
 
-    private static int countFanOut(List<TypeInfo> publicTypesInModule, List<String> publicAndPaicTypesFull){
-        List<String> publicAndPaicTypesOtherFull = getTypesInOtherModule(publicTypesInModule, publicAndPaicTypesFull);
-        return publicTypesInModule.stream()
-                .flatMap(type -> calcAndGetDepTypesToOtherModule(type, publicAndPaicTypesOtherFull).stream())
-                .collect(Collectors.toSet())
-                .size();
-    }
+//    private int calcModuleFanOut(List<TypeInfo> publicTypesInModule){
+//        List<String> publicAndPaicTypesOtherFull = getTypesFullInOtherModule(publicTypesInModule);
+//        return publicTypesInModule.stream()
+//                .mapToInt(typeInfo -> subTypesDepOtherModuleCount(typeInfo, publicAndPaicTypesOtherFull))
+//                .sum();
+//    }
 
-    private static List<String> getTypesInOtherModule(List<TypeInfo> publicTypesInModule, List<String> publicAndPaicTypesFull){
-        return publicAndPaicTypesFull.stream()
-                .filter(typeStr-> !containTypesInModule(typeStr, publicTypesInModule))
-                .collect(Collectors.toList());
-    }
-
-    private static boolean containTypesInModule(String typeStr, List<TypeInfo> publicTypesInModule){
-        return publicTypesInModule.stream()
-                .flatMap(typeInfo->typeInfo.getTypeContent().stream())
-                .anyMatch(typeStr::contains);
-    }
-
-//    private static int countFanIn(List<TypeInfo> publicTypesInModule, List<String> publicAndPaicTypesFull){
+    //    private int countFanIn(List<TypeInfo> publicTypesInModule, List<String> publicAndPaicTypesFull){
 //        Map<String, AtomicInteger> fanIn = new HashMap<>();
 //
 //
@@ -54,16 +54,16 @@ public class ModuleDependency{
 //    }
 
 
-    public static Integer calcAbstractness(List<TypeInfo> publicTypesInModule){
-        int absClassCount = (int)publicTypesInModule.stream()
+    private Integer calcModuleAbstractness(List<TypeInfo> publicTypesInModule){
+        int absClassCount = publicTypesInModule.stream()
                 .mapToInt(TypeAnalysis::abstractCount)
                 .sum();
 
-        int interfaceCount = (int)publicTypesInModule.stream()
+        int interfaceCount = publicTypesInModule.stream()
                 .mapToInt(TypeAnalysis::interfaceCount)
                 .sum();
 
-        int classAndEnumCount = (int)publicTypesInModule.stream()
+        int classAndEnumCount = publicTypesInModule.stream()
                 .mapToInt(TypeAnalysis::classAndEnumCount)
                 .sum();
 
@@ -77,5 +77,13 @@ public class ModuleDependency{
         return null;
     }
 
+
+    public Integer getModuleAbstract() {
+        return moduleAbstract;
+    }
+
+//    public Integer getModuleInstability() {
+//        return moduleInstability;
+//    }
 
 }
