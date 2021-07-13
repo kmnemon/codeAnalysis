@@ -15,9 +15,7 @@ import static codeanalysis.ModuleDependency.calcModuleInstability;
 public class ProjectDependency{
     private static final Logger LOG = LoggerFactory.getLogger(ProjectDependency.class);
 
-
     private ProjectDependency(){}
-
 
     static Map<ModuleInfo, Double> calcModulesAbstractness(ProjectInfo p){
         Map<ModuleInfo, Double> modulesAbs = new HashMap<>();

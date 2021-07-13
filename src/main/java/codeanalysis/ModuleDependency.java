@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static java.lang.Double.NaN;
+
 public class ModuleDependency{
     private static final Logger LOG = LoggerFactory.getLogger(ModuleDependency.class);
 
@@ -21,7 +23,7 @@ public class ModuleDependency{
             LOG.error("fanIn + Out is zero: " + e.getMessage());
         }
 
-        return null;
+        return NaN;
     }
 
     static int calcModuleFanIn(List<TypeInfo> publicTypesInModule, Map<TypeInfo, AtomicInteger> typesFanIn){
@@ -84,7 +86,7 @@ public class ModuleDependency{
             LOG.error("nc is zero: " + e.getMessage());
         }
 
-        return null;
+        return NaN;
     }
 
 
