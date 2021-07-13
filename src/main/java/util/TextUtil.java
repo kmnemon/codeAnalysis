@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TextService {
+public class TextUtil {
     public static List<String> linesToWords(List<String> lines){
         return lines.stream()
                 .flatMap(line-> Arrays.stream(line.split(" ")))

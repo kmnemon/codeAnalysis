@@ -1,13 +1,13 @@
 package codeanalysis;
 
-import util.BasicTypeService;
+import util.BasicTypeUtil;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static util.BasicTypeService.combineList;
+import static util.BasicTypeUtil.combineList;
 
 public class BasicInfo {
     final List<Path> filesPathInProject;
@@ -22,7 +22,7 @@ public class BasicInfo {
         this.filesPathInProject = filesPathInProject;
         publicTypesInfo = calcPublicTypesInfoFromPaths(filesPathInProject);
 
-        importPaicTypes = BasicTypeService.findAllimportPaicTypes(publicTypesInfo);
+        importPaicTypes = BasicTypeUtil.findAllimportPaicTypes(publicTypesInfo);
 
         importPaicTypesInfo = getImportPaicTypesInfo();
         publicAndPaicTypesInfo = combineList(publicTypesInfo, importPaicTypesInfo);

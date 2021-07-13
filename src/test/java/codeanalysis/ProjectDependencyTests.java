@@ -12,8 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static codeanalysis.ProjectDependency.calcModulesAbstractness;
 import static codeanalysis.ProjectDependency.calcModulesInstability;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static util.BasicTypeService.findAllimportPaicTypes;
-import static util.FilePathService.getFilesPathInProject;
+import static util.BasicTypeUtil.findAllimportPaicTypes;
+import static util.FilePathUtil.getFilesPathInProject;
 
 public class ProjectDependencyTests {
     static BasicInfo basicInfo;

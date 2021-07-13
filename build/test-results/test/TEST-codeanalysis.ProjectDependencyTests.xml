@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="codeanalysis.ProjectDependencyTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-13T10:55:56" hostname="Kes-MacBook-Pro.local" time="0.038">
+<testsuite name="codeanalysis.ProjectDependencyTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-07-13T14:42:08" hostname="kes-iMac.local" time="0.014">
   <properties/>
-  <testcase name="calcModulesInstabilityTests()" classname="codeanalysis.ProjectDependencyTests" time="0.038"/>
+  <testcase name="calcModulesInstabilityTests()" classname="codeanalysis.ProjectDependencyTests" time="0.004"/>
+  <testcase name="calcTypesFanInInProjectTests()" classname="codeanalysis.ProjectDependencyTests" time="0.003"/>
+  <testcase name="calcModulesAbstractnessTests()" classname="codeanalysis.ProjectDependencyTests" time="0.004"/>
+  <testcase name="findAllimportPaicTypesTests()" classname="codeanalysis.ProjectDependencyTests" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

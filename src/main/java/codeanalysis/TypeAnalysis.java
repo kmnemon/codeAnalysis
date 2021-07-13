@@ -2,7 +2,7 @@ package codeanalysis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import util.TextService;
+import util.TextUtil;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static util.FilePathService.typePathToTypeName;
-import static util.TextService.linesToWords;
+import static util.FilePathUtil.typePathToTypeName;
+import static util.TextUtil.linesToWords;
 
 ;
 
@@ -64,7 +64,7 @@ public class TypeAnalysis {
         List<String> words = linesToWords(subType);
 
         return publicAndPaicTypesInfoOtherFull.stream()
-                .anyMatch(type-> TextService.containWordsLastToFront(type.getFullTypeName(), words));
+                .anyMatch(type-> TextUtil.containWordsLastToFront(type.getFullTypeName(), words));
     }
 
 

@@ -2,7 +2,7 @@ package codeanalysis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import util.TextService;
+import util.TextUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,13 +49,13 @@ public class ProjectDependency{
 
     private static void calcSubTypeFanInInOtherModule(Map<String, List<String>> subTypesContent, List<TypeInfo> typesInOtherModule, Map<TypeInfo, AtomicInteger> typesFanIn){
         subTypesContent.values().stream()
-                .map(TextService::linesToWords)
+                .map(TextUtil::linesToWords)
                 .forEach(subTypeWords-> calcSubTypeFanInOtherModule(subTypeWords, typesInOtherModule, typesFanIn));
     }
 
     private static void calcSubTypeFanInOtherModule(List<String> subTypeWords, List<TypeInfo> typesInOtherModule, Map<TypeInfo, AtomicInteger> typesFanIn){
         typesInOtherModule.stream()
-                .filter(type-> TextService.containWordsLastToFront(type.getFullTypeName(), subTypeWords))
+                .filter(type-> TextUtil.containWordsLastToFront(type.getFullTypeName(), subTypeWords))
                 .forEach(type-> typesFanIn.get(type).incrementAndGet());
     }
 }

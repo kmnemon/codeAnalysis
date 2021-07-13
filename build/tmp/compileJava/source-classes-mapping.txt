@@ -1,0 +1,24 @@
+codeanalysis/TypeInfo.java
+ codeanalysis.TypeInfo
+codeanalysis/Test.java
+ codeanalysis.Test
+util/TextUtil.java
+ util.TextUtil
+codeanalysis/ModuleDependency.java
+ codeanalysis.ModuleDependency
+codeanalysis/FileInput.java
+ codeanalysis.FileInput
+util/BasicTypeUtil.java
+ util.BasicTypeUtil
+codeanalysis/BasicInfo.java
+ codeanalysis.BasicInfo
+util/FilePathUtil.java
+ util.FilePathUtil
+codeanalysis/TypeAnalysis.java
+ codeanalysis.TypeAnalysis
+codeanalysis/ModuleInfo.java
+ codeanalysis.ModuleInfo
+codeanalysis/ProjectDependency.java
+ codeanalysis.ProjectDependency
+codeanalysis/ProjectInfo.java
+ codeanalysis.ProjectInfo

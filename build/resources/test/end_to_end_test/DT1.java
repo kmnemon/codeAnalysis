@@ -1,19 +1,16 @@
-package ke.ke.WHAT;
+package ke.ke.XP;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.aaa.bbb.ccc
 
 @Component
-public abstract class SendMailone {
+public class DT1 extend DT2{
     private static final Logger LOG = LoggerFactory.getLogger(SendMail.class);
 
     @Autowired
     private JavaMailSender jms;
+    abstract class BC1{
+
+    }
 
 
     @Scheduled(fixedRate = 7200000)
@@ -33,4 +30,8 @@ public abstract class SendMailone {
             LOG.debug("fail to send email", e);
         }
     }
+}
+
+enum AAA{
+    
 }

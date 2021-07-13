@@ -1,19 +1,17 @@
-package ke.ke.WHAT;
+package ke.ke.UBANTU;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+
 
 @Component
-public abstract class SendMailone {
+public class DT2 {
     private static final Logger LOG = LoggerFactory.getLogger(SendMail.class);
 
     @Autowired
     private JavaMailSender jms;
+    abstrct class BC2{
+        
+    }
 
 
     @Scheduled(fixedRate = 7200000)

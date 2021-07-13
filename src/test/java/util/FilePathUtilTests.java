@@ -7,18 +7,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static util.FilePathService.typePathToTypeName;
+import static util.FilePathUtil.typePathToTypeName;
 
-public class FilePathServiceTests {
+public class FilePathUtilTests {
     @Test
     public void getFilesPathInProjectTests(){
-        List<Path> dirs = FilePathService.getFilesPathInProject("/Users/keliu/IdeaProjects/acquireIP", "java");
-        assertEquals(5, dirs.size());
+        List<Path> dirs = FilePathUtil.getFilesPathInProject("./src/test/resources/test_project/basicdata", "java");
+        assertEquals(3, dirs.size());
 
-        dirs = FilePathService.getFilesPathInProject("/Users/keliu/tmp", "java");
-        assertEquals(1, dirs.size());
-
-        dirs = FilePathService.getJavaFilesPathInProjectByCurrentPath();
+        dirs = FilePathUtil.getJavaFilesPathInProjectByCurrentPath();
         assertTrue(dirs.size()>6);
     }
 

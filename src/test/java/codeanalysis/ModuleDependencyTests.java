@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static codeanalysis.ModuleDependency.calcModuleFanIn;
 import static codeanalysis.ModuleDependency.calcModuleFanOut;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static util.FilePathService.getFilesPathInProject;
+import static util.FilePathUtil.getFilesPathInProject;
 
 public class ModuleDependencyTests {
     @BeforeAll

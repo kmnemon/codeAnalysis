@@ -15,7 +15,7 @@ public class SendMailhalf {
     @Autowired
     private JavaMailSender jms;
 
-
+    abstract class HAHA{}
     @Scheduled(fixedRate = 7200000)
     public void sendEmail() {
         try {

@@ -9,10 +9,10 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class FilePathService {
-    private static final Logger LOG = LoggerFactory.getLogger(FilePathService.class);
+public class FilePathUtil {
+    private static final Logger LOG = LoggerFactory.getLogger(FilePathUtil.class);
 
-    private FilePathService(){}
+    private FilePathUtil(){}
 
     public static List<Path> getFilesPathInProject(String searchDir, String fileExt){
         try {

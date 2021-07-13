@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class BasicTypeService {
+public class BasicTypeUtil {
     //Map<ModuleInfo, List<TypeInfo>> modulesInProject
     public static List<String> findAllimportPaicTypes(List<TypeInfo> allTypesInfo) {
         List<String> importTypes = new ArrayList<>();
