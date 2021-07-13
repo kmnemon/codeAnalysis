@@ -9,14 +9,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SendMail {
+public class SendMailzero {
     private static final Logger LOG = LoggerFactory.getLogger(SendMail.class);
 
     @Autowired
     private JavaMailSender jms;
-    abstract class bcs{
-
-    }
 
 
     @Scheduled(fixedRate = 7200000)
@@ -36,8 +33,4 @@ public class SendMail {
             LOG.debug("fail to send email", e);
         }
     }
-}
-
-enum aaa{
-    
 }

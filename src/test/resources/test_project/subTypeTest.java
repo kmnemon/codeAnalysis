@@ -14,8 +14,8 @@ public class SendMail {
 
     @Autowired
     private JavaMailSender jms;
-    abstract class bcs{
-
+    abstrct class bcs{
+        
     }
 
 
@@ -38,6 +38,4 @@ public class SendMail {
     }
 }
 
-enum aaa{
-    
-}
+enum aaa{}
