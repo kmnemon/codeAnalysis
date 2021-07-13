@@ -3,20 +3,18 @@ package ke.ke.acquireIP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
+import org.paic.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.paic.annotation.Scheduled.*;
 import org.springframework.stereotype.Component;
+import com.paic.aaa.bbb;
 
 @Component
-public class SendMail {
+public class type1 extends type2 {
     private static final Logger LOG = LoggerFactory.getLogger(SendMail.class);
 
     @Autowired
     private JavaMailSender jms;
-    abstract class bcs{
-
-    }
 
 
     @Scheduled(fixedRate = 7200000)
@@ -36,8 +34,4 @@ public class SendMail {
             LOG.debug("fail to send email", e);
         }
     }
-}
-
-enum aaa{
-    
 }

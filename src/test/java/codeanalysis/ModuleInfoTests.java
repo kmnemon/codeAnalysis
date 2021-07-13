@@ -1,11 +1,12 @@
 package codeanalysis;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static util.FilePathService.getJavaFilesPathInProjectByCurrentPath;
@@ -21,7 +22,10 @@ public class ModuleInfoTests {
     @Test
     void sameModuleTests(){
         ModuleInfo m1 = new ModuleInfo("aaa", basicInfo);
-        ModuleInfo m2 = new ModuleInfo("aaa", basicInfo);
+        ModuleInfo m2 = new ModuleInfo("aaa");
+
+        Map<ModuleInfo, Integer> a = new HashMap<>();
+        a.put(m1, 3);
 
         assertEquals(m1, m2);
     }

@@ -3,10 +3,10 @@ package codeanalysis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.file.Path;
-import java.util.*;
-
-import static util.FilePathService.getJavaFilesPathInProjectByCurrentPath;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 class ProjectInfo {
@@ -22,16 +22,20 @@ class ProjectInfo {
     }
 
     public void initModulesInProject(){
-        basicInfo.getAllTypesInfo().forEach(this::initModules);
+        basicInfo.getPublicTypesInfo().forEach(this::initModules);
     }
 
     private void initModules(TypeInfo type){
-            modulesInProject.computeIfAbsent(new ModuleInfo(type.getPackageName(), basicInfo), k -> new ArrayList<>());
-            modulesInProject.get(new ModuleInfo(type.getPackageName(), basicInfo)).add(type);
+        modulesInProject.computeIfAbsent(new ModuleInfo(type.getPackageName(), basicInfo), k -> new ArrayList<>());
+        modulesInProject.get(new ModuleInfo(type.getPackageName(), basicInfo)).add(type);
     }
 
     public Map<ModuleInfo, List<TypeInfo>> getModulesInProject() {
         return modulesInProject;
+    }
+
+    public BasicInfo getBasicInfo() {
+        return basicInfo;
     }
 
     @Override

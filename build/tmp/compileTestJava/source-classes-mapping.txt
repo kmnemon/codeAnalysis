@@ -2,8 +2,12 @@ util/FilePathServiceTests.java
  util.FilePathServiceTests
 codeanalysis/ProjectInfoTests.java
  codeanalysis.ProjectInfoTests
+codeanalysis/BasicInfoTests.java
+ codeanalysis.BasicInfoTests
 codeanalysis/ModuleInfoTests.java
  codeanalysis.ModuleInfoTests
+codeanalysis/ModuleDependencyTests.java
+ codeanalysis.ModuleDependencyTests
 codeanalysis/TypeAnalysisTests.java
  codeanalysis.TypeAnalysisTests
 codeanalysis/ProjectDependencyTests.java

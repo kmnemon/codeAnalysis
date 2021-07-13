@@ -1,12 +1,14 @@
 package codeanalysis;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class ModuleInfo {
     private final String moduleName;
     protected BasicInfo basicInfo;
+
+    ModuleInfo(String moduleName){
+        this.moduleName = moduleName;
+    }
 
     ModuleInfo(String moduleName, BasicInfo basicInfo){
         this.moduleName = moduleName;
@@ -29,15 +31,12 @@ public class ModuleInfo {
         return Objects.hashCode(moduleName);
     }
 
-    List<String> getTypesFullInOtherModule(List<TypeInfo> publicTypesInModuleExclude){
-        return basicInfo.getPublicAndPaicTypesFull().stream()
-                .filter(typeStr-> !ModuleInfo.containTypesInModule(typeStr, publicTypesInModuleExclude))
-                .collect(Collectors.toUnmodifiableList());
+    @Override
+    public String toString(){
+        return moduleName;
     }
 
-    private static boolean containTypesInModule(String typeStr, List<TypeInfo> publicTypesInModule){
-        return publicTypesInModule.stream()
-                .map(TypeInfo::getTypeName)
-                .anyMatch(typeStr::contains);
+    public String getModuleName() {
+        return moduleName;
     }
 }

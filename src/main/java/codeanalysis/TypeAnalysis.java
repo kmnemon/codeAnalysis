@@ -7,11 +7,16 @@ import util.TextService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static util.FilePathService.typePathToTypeName;
 import static util.TextService.linesToWords;
+
+;
 
 public class TypeAnalysis {
     private static final Logger LOG = LoggerFactory.getLogger(TypeAnalysis.class);
@@ -19,6 +24,8 @@ public class TypeAnalysis {
     public static String getPackageName(List<String> typeContent){
         return typeContent.stream()
                 .filter(line->line.contains("package"))
+                .map(str->str.replace("package ", ""))
+                .map(str->str.replace(";", ""))
                 .findFirst()
                 .orElse("");
     }
@@ -27,6 +34,7 @@ public class TypeAnalysis {
         try {
             List<String> typeContent = Files.readAllLines(path).stream()
                     .filter( line-> !(line.contains("//") || line.contains("/*") || line.contains("*/")) )
+                    .filter(line->!line.isEmpty())
                     .collect(Collectors.toUnmodifiableList());
             String packageName = getPackageName(typeContent);
             String typeName = typePathToTypeName(path);
@@ -40,39 +48,23 @@ public class TypeAnalysis {
         return null;
     }
 
-    /**
-     * Dependency define:
-     * 1.Type implement
-     * 2.Type extend
-     * 3.used instance
-     * above dependency not include standard library,because standard libraries are stable
-     *
-     */
-    public static int subTypesDepOtherModuleCount(TypeInfo typeInfo, List<String> publicAndPaicTypesOtherFull){
-        if( typeInfo.getTypeContent().isEmpty()) {
-            LOG.info(typeInfo.getTypeName() + " is empty");
-            return 0;
-        }
+    public static TypeInfo initTypeWithStr(String str){
+        int index = str.lastIndexOf(".");
+        if( index == -1)
+            return null;
 
-        Map<String, List<String>> subTypes = subTypeSplit(typeInfo);
-        if( subTypes.isEmpty()){
-            LOG.info("java file don't have types");
-            return 0;
-        }
+        String packageName = str.substring(0, index);
+        String typeName = str.substring(index+1);
 
-        return (int)subTypes.values().stream()
-                .map(subType-> isDepOtherTypes(subType, publicAndPaicTypesOtherFull))
-                .filter(item->item.equals(Boolean.TRUE))
-                .count();
+        return new TypeInfo(typeName, packageName, null);
     }
 
 
-
-    public static boolean isDepOtherTypes(List<String> subType, List<String> publicAndPaicTypesOtherFull){
+    public static boolean isDepOtherTypes(List<String> subType, List<TypeInfo> publicAndPaicTypesInfoOtherFull){
         List<String> words = linesToWords(subType);
 
-        return publicAndPaicTypesOtherFull.stream()
-                .anyMatch(typeStr-> TextService.containWords(typeStr, words));
+        return publicAndPaicTypesInfoOtherFull.stream()
+                .anyMatch(type-> TextService.containWordsLastToFront(type.getFullTypeName(), words));
     }
 
 
@@ -101,7 +93,7 @@ public class TypeAnalysis {
         return line.contains("interface ") || line.contains("enum ") || line.contains("class ");
     }
 
-    public static Map<String, List<String>> subTypeSplit(TypeInfo typeInfo){
+    public static Map<String, List<String>> subTypeContentSplit(TypeInfo typeInfo){
         if( typeInfo.getTypeContent().isEmpty()) {
             LOG.info(typeInfo.getTypeName() + " is empty");
             return new HashMap<>();
@@ -116,7 +108,7 @@ public class TypeAnalysis {
                 indexes.add(lineNum);
             lineNum++;
         }
-        indexes.add(typeContent.size()-1);
+        indexes.add(typeContent.size());
 
         Map<String, List<String>> subTypes = new HashMap<>();
         Integer fromIndex = indexes.get(0);

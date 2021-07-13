@@ -16,7 +16,7 @@ public class TypeAnalysisTests {
 
     @BeforeAll
     public static void initTypeTests(){
-        Path path = Path.of("/Users/keliu/tmp/ProductServiceImpl.java");
+        Path path = Path.of("./src/test/resources/test_project/subTypeTest.java");
         typeInfo = initType(path);
     }
 
@@ -28,7 +28,7 @@ public class TypeAnalysisTests {
         testContent.add("1111");
         testContent.add("package com.xxx.xxx.xxx");
 
-        assertEquals("package com.aaa.bbb.ccc", getPackageName(testContent));
+        assertEquals("com.aaa.bbb.ccc", getPackageName(testContent));
 
         List<String> noContents = new ArrayList<>();
         noContents.add("dfsdf");
@@ -49,7 +49,7 @@ public class TypeAnalysisTests {
 
     @Test
     public void subTypeSplitTests(){
-        Map<String, List<String>> subTypes = subTypeSplit(typeInfo);
+        Map<String, List<String>> subTypes = subTypeContentSplit(typeInfo);
         assertEquals(3, subTypes.size());
 
     }

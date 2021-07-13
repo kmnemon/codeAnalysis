@@ -2,52 +2,60 @@ package codeanalysis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import util.BasicTypeService;
 import util.TextService;
 
-import java.nio.file.Path;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static util.BasicTypeService.combineList;
-import static util.FilePathService.typesPathToFullTypesName;
+import static codeanalysis.ModuleDependency.calcModuleAbstractness;
+import static codeanalysis.ModuleDependency.calcModuleInstability;
 
 public class ProjectDependency{
     private static final Logger LOG = LoggerFactory.getLogger(ProjectDependency.class);
 
-    private static Map<String, AtomicInteger> fanIn = new HashMap<>();
 
     private ProjectDependency(){}
 
-    private static void calcModulesAbstractness(List<String> publicTypesFull, Map<ModuleInfo, List<TypeInfo>> modulesInProject){
-        calcProjectFanIn(publicTypesFull, modulesInProject);
-//        modulesInProject.values()
+
+    static Map<ModuleInfo, Double> calcModulesAbstractness(ProjectInfo p){
+        Map<ModuleInfo, Double> modulesAbs = new HashMap<>();
+        p.getModulesInProject().forEach((k, v)-> modulesAbs.put(k, calcModuleAbstractness(v)));
+        return modulesAbs;
     }
 
-    private static void calcProjectFanIn(List<String> publicTypesFull, Map<ModuleInfo, List<TypeInfo>> modulesInProject){
-        publicTypesFull.forEach(str-> fanIn.putIfAbsent(str, new AtomicInteger()));
-
-        modulesInProject.forEach(ProjectDependency::calcModuleFanInOtherModule);
+    static Map<ModuleInfo, Double> calcModulesInstability(ProjectInfo p){
+        Map<ModuleInfo, Double> modulesInstability = new HashMap<>();
+        Map<TypeInfo, AtomicInteger> typesFanIn = calcTypesFanInInProject(p);
+        p.getModulesInProject().forEach((k, v)-> modulesInstability.put(k, calcModuleInstability(v, typesFanIn, p.getBasicInfo())));
+        return modulesInstability;
     }
 
-    private static void calcModuleFanInOtherModule(ModuleInfo moduleInfo, List<TypeInfo> typeInModule){
-        List<String> typesFullInOtherModule = moduleInfo.getTypesFullInOtherModule(typeInModule);
-        typeInModule.stream()
-                .map(TypeAnalysis::subTypeSplit)  //Map<String, List<String>>
-                .forEach(subTypes-> calcTypeFanInOtherModule(subTypes, typesFullInOtherModule));
+    static Map<TypeInfo, AtomicInteger> calcTypesFanInInProject(ProjectInfo p){
+        Map<TypeInfo, AtomicInteger> typesFanIn = new HashMap<>();
+        p.getBasicInfo().getPublicTypesInfo().forEach(type-> typesFanIn.putIfAbsent(type, new AtomicInteger()));
+
+        p.getModulesInProject().values().forEach(v->calcTypesFanInInOtherModule(v, p, typesFanIn));
+        return typesFanIn;
     }
 
-    private static void calcTypeFanInOtherModule(Map<String, List<String>> subTypes, List<String> typesFullInOtherModule){
-        subTypes.values().stream()
+    private static void calcTypesFanInInOtherModule(List<TypeInfo> typesInModule, ProjectInfo p, Map<TypeInfo, AtomicInteger> typesFanIn){
+        List<TypeInfo> typesInOtherModule = p.basicInfo.getOtherTypesInfoExclueSelf(p.basicInfo.getPublicTypesInfo(), typesInModule);
+        typesInModule.stream()
+                .map(TypeAnalysis::subTypeContentSplit)  //Map<String, List<String>>
+                .forEach(subTypesContent-> calcSubTypeFanInInOtherModule(subTypesContent, typesInOtherModule, typesFanIn));
+    }
+
+    private static void calcSubTypeFanInInOtherModule(Map<String, List<String>> subTypesContent, List<TypeInfo> typesInOtherModule, Map<TypeInfo, AtomicInteger> typesFanIn){
+        subTypesContent.values().stream()
                 .map(TextService::linesToWords)
-                .forEach(subTypeWords-> calcSubTypeFanInOtherModule(subTypeWords, typesFullInOtherModule));
+                .forEach(subTypeWords-> calcSubTypeFanInOtherModule(subTypeWords, typesInOtherModule, typesFanIn));
     }
 
-    private static void calcSubTypeFanInOtherModule(List<String> subTypeWords, List<String> typesFullInOtherModule){
-        typesFullInOtherModule.stream()
-                .filter(typeStr-> TextService.containWords(typeStr, subTypeWords))
-                .forEach(typeStr-> fanIn.get(typeStr).incrementAndGet());
+    private static void calcSubTypeFanInOtherModule(List<String> subTypeWords, List<TypeInfo> typesInOtherModule, Map<TypeInfo, AtomicInteger> typesFanIn){
+        typesInOtherModule.stream()
+                .filter(type-> TextService.containWordsLastToFront(type.getFullTypeName(), subTypeWords))
+                .forEach(type-> typesFanIn.get(type).incrementAndGet());
     }
 }

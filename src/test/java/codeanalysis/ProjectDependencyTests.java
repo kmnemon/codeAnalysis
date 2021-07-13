@@ -5,20 +5,25 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import static util.BasicTypeService.findAllimportPaicTypes;
+import static codeanalysis.ProjectDependency.calcModulesAbstractness;
+import static codeanalysis.ProjectDependency.calcModulesInstability;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static util.FilePathService.getJavaFilesPathInProjectByCurrentPath;
+import static util.BasicTypeService.findAllimportPaicTypes;
+import static util.FilePathService.getFilesPathInProject;
 
 public class ProjectDependencyTests {
     static BasicInfo basicInfo;
+    static ProjectInfo p;
     @BeforeAll
     static void initBasicInfo(){
-        List<Path> javaFiles = getJavaFilesPathInProjectByCurrentPath();
+        List<Path> javaFiles = getFilesPathInProject("./src/test/resources/test_project", "java");
         basicInfo = new BasicInfo(javaFiles);
+        p = new ProjectInfo(basicInfo);
+
     }
 
     @Test
@@ -41,6 +46,37 @@ public class ProjectDependencyTests {
 
         assertEquals(3, findAllimportPaicTypes(ti).size());
         assertEquals("com.paic.aaa", findAllimportPaicTypes(ti).get(0));
-
     }
+
+    @Test
+    void calcModulesAbstractnessTests(){
+        List<Path> javaFiles = getFilesPathInProject("./src/test/resources/test_project/abstractnesstestdata", "java");
+        basicInfo = new BasicInfo(javaFiles);
+        ProjectInfo p = new ProjectInfo(basicInfo);
+        Map<ModuleInfo, Double> modAbs = calcModulesAbstractness(p);
+        assertEquals(2, modAbs.size());
+        assertEquals(0.5, modAbs.get(new ModuleInfo("ke.ke.acquireIP")));
+    }
+
+    @Test
+    void calcTypesFanInInProjectTests(){
+        List<Path> javaFiles = getFilesPathInProject("./src/test/resources/test_project/instabilitydata", "java");
+        basicInfo = new BasicInfo(javaFiles);
+        ProjectInfo p = new ProjectInfo(basicInfo);
+        Map<TypeInfo, AtomicInteger> faninP = ProjectDependency.calcTypesFanInInProject(p);
+
+        assertEquals(2, faninP.get(new TypeInfo("type2","ke.ke.otherModule",null )).get());
+    }
+
+    @Test
+    public void calcModulesInstabilityTests(){
+        List<Path> javaFiles = getFilesPathInProject("./src/test/resources/test_project/instabilitydata", "java");
+        basicInfo = new BasicInfo(javaFiles);
+        ProjectInfo p = new ProjectInfo(basicInfo);
+
+        Map<ModuleInfo, Double> i = calcModulesInstability(p);
+        assertEquals(2, i.size());
+    }
+
+
 }
