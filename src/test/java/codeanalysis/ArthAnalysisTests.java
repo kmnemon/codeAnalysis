@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static codeanalysis.ArthAnalysis.calcModuleDistance;
 import static codeanalysis.ArthAnalysis.combineAbsAndInsToPairMap;
 import static java.lang.Double.NaN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,4 +36,15 @@ public class ArthAnalysisTests {
 //        testMap.entrySet().stream()
 //                .forEach(e-> System.out.println(e.getKey().getModuleName() + ": " +e.getValue()));
     }
+
+    @Test
+    public void calcModuleDistanceTests(){
+        ModuleInfo m = new ModuleInfo("test");
+        AbsAndInsPair pair = new AbsAndInsPair(0.5,0.5);
+        Map<ModuleInfo, AbsAndInsPair> aiPairs = new HashMap<>();
+        aiPairs.put(m, pair);
+
+        assertEquals(0,calcModuleDistance(aiPairs).get(m));
+    }
+
 }

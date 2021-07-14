@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
+import static codeanalysis.ArthAnalysis.calcModuleDistance;
 import static codeanalysis.ArthAnalysis.combineAbsAndInsToPairMap;
 import static codeanalysis.ProjectDependency.calcModulesAbstractness;
 import static codeanalysis.ProjectDependency.calcModulesInstability;
@@ -26,6 +27,8 @@ public class FileInput {
 //        instab.forEach((k,v)-> System.out.println(k.getModuleName() + " : " + v));
 
         Map<ModuleInfo, AbsAndInsPair> absAndInsInMod= combineAbsAndInsToPairMap(abs, instab);
+        Map<ModuleInfo, Double> modDistance = calcModuleDistance(absAndInsInMod);
+        modDistance.forEach((k,v)-> System.out.println(k.getModuleName() + " : " + v));
 
 
 
