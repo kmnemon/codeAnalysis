@@ -2,18 +2,18 @@ codeanalysis/TypeInfo.java
  codeanalysis.TypeInfo
 codeanalysis/ModuleDependency.java
  codeanalysis.ModuleDependency
+util/BasicTypeUtil.java
+ util.BasicTypeUtil
 codeanalysis/ProjectDependency.java
  codeanalysis.ProjectDependency
-codedisplay/CommandDisplay.java
- codedisplay.CommandDisplay
 codeanalysis/Test.java
  codeanalysis.Test
 codeanalysis/AbsAndInsPair.java
  codeanalysis.AbsAndInsPair
 codeanalysis/BasicInfo.java
  codeanalysis.BasicInfo
-codeanalysis/TypeAnalysis.java
- codeanalysis.TypeAnalysis
+util/FilePathUtil.java
+ util.FilePathUtil
 codeanalysis/ArthAnalysis.java
  codeanalysis.ArthAnalysis
 codeanalysis/ModuleInfo.java
@@ -22,15 +22,15 @@ util/MathUtil.java
  util.MathUtil
 codeanalysis/ProjectInfo.java
  codeanalysis.ProjectInfo
-util/TextUtil.java
- util.TextUtil
-codeanalysis/CodeDisplay.java
- codeanalysis.CodeDisplay
-util/BasicTypeUtil.java
- util.BasicTypeUtil
-util/FilePathUtil.java
- util.FilePathUtil
-codeanalysis/FileInput.java
- codeanalysis.FileInput
 codedisplay/CoordinateDisplay.java
  codedisplay.CoordinateDisplay
+codeanalysis/CodeDisplay.java
+ codeanalysis.CodeDisplay
+util/TextUtil.java
+ util.TextUtil
+codedisplay/CommandDisplay.java
+ codedisplay.CommandDisplay
+codeanalysis/TypeAnalysis.java
+ codeanalysis.TypeAnalysis
+codeanalysis/FileInput.java
+ codeanalysis.FileInput

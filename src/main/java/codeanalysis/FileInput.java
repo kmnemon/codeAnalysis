@@ -1,6 +1,6 @@
 package codeanalysis;
 
-import codedisplay.CoordinateDisplay;
+import codedisplay.CommandDisplay;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -30,10 +30,10 @@ public class FileInput {
 
         Map<ModuleInfo, AbsAndInsPair> absAndInsInMod= combineAbsAndInsToPairMap(abs, instab);
         Map<ModuleInfo, Double> modDistance = calcModuleDistance(absAndInsInMod);
-//        CodeDisplay dis = new CommandDisplay();
-//        dis.display(modDistance, absAndInsInMod);
-        CodeDisplay dis = new CoordinateDisplay();
+        CodeDisplay dis = new CommandDisplay();
         dis.display(modDistance, absAndInsInMod);
+//        CodeDisplay dis = new CoordinateDisplay();
+//        dis.display(modDistance, absAndInsInMod);
 
 
 
