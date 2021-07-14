@@ -6,8 +6,8 @@ codeanalysis/ProjectDependency.java
  codeanalysis.ProjectDependency
 codeanalysis/Test.java
  codeanalysis.Test
-codeanalysis/AbsAndInsPair.java
- codeanalysis.AbsAndInsPair
+util/MathUtil.java
+ util.MathUtil
 codeanalysis/BasicInfo.java
  codeanalysis.BasicInfo
 codeanalysis/TypeAnalysis.java
@@ -22,9 +22,9 @@ util/TextUtil.java
  util.TextUtil
 util/BasicTypeUtil.java
  util.BasicTypeUtil
-util/MathUtil.java
- util.MathUtil
-codeanalysis/ArthAnalysis.java
- codeanalysis.ArthAnalysis
 codeanalysis/FileInput.java
  codeanalysis.FileInput
+codeanalysis/AbsAndInsPair.java
+ codeanalysis.AbsAndInsPair
+codeanalysis/ArthAnalysis.java
+ codeanalysis.ArthAnalysis

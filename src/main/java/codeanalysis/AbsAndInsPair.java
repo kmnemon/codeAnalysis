@@ -1,25 +1,19 @@
 package codeanalysis;
 
 public class AbsAndInsPair {
-    private Double abstractness;
     private Double instability;
+    private Double abstractness;
+
 
     AbsAndInsPair(Double abstractness, Double instability){
-        this.abstractness = abstractness;
         this.instability = instability;
+        this.abstractness = abstractness;
+
     }
 
     @Override
     public String toString(){
-        return abstractness.toString() + ":" + instability.toString();
-    }
-
-    public Double getAbstractness() {
-        return abstractness;
-    }
-
-    public void setAbstractness(Double abstractness) {
-        this.abstractness = abstractness;
+        return "I"+String.format("%.2f",instability) + ": A" +  String.format("%.2f", abstractness);
     }
 
     public Double getInstability() {
@@ -28,5 +22,13 @@ public class AbsAndInsPair {
 
     public void setInstability(Double instability) {
         this.instability = instability;
+    }
+
+    public Double getAbstractness() {
+        return abstractness;
+    }
+
+    public void setAbstractness(Double abstractness) {
+        this.abstractness = abstractness;
     }
 }
