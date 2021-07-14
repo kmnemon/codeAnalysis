@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="codeanalysis.ModuleDependencyTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-07-14T02:38:02" hostname="Kes-MacBook-Pro.local" time="0.086">
+<testsuite name="codeanalysis.ModuleDependencyTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-07-14T03:34:41" hostname="Kes-MacBook-Pro.local" time="0.047">
   <properties/>
-  <testcase name="calcModuleFanInTests()" classname="codeanalysis.ModuleDependencyTests" time="0.078"/>
+  <testcase name="calcModuleFanInTests()" classname="codeanalysis.ModuleDependencyTests" time="0.04"/>
   <testcase name="calcModuleFanOutTests()" classname="codeanalysis.ModuleDependencyTests" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

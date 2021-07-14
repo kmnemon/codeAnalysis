@@ -32,7 +32,7 @@ public class ArthAnalysisTests {
 
         Map<ModuleInfo, AbsAndInsPair> testMap = combineAbsAndInsToPairMap(abs, ins);
         assertEquals(1, testMap.size());
-        assertEquals("0.5:0.7", testMap.get(m1).toString());
+        assertEquals("I0.70: A0.50", testMap.get(m1).toString());
 //        testMap.entrySet().stream()
 //                .forEach(e-> System.out.println(e.getKey().getModuleName() + ": " +e.getValue()));
     }

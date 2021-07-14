@@ -14,6 +14,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.31'
     implementation group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.31'
+    implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
+
 
 
 }
