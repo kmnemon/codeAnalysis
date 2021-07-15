@@ -4,6 +4,7 @@ import codeanalysis.TypeInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,5 +32,12 @@ public class BasicTypeUtil {
         return Stream.concat(str1.stream(), str2.stream())
                  .collect(Collectors.toUnmodifiableList());
      }
+
+    public static <T> List<T> combineListWithoutDuplicate(List<T> str1, List<T> str2){
+        Set<T> l = Stream.concat(str1.stream(), str2.stream())
+                .collect(Collectors.toSet());
+
+        return new ArrayList<>(l);
+    }
 
 }

@@ -52,7 +52,7 @@ public class BasicInfoTests {
 
     @Test
     public void getImportPaicTypesInfoTests(){
-        List<TypeInfo> typeInfos = basicInfo.getImportPaicTypesInfo();
+        List<TypeInfo> typeInfos = basicInfo.calcImportPaicTypesInfo();
         assertEquals(2, typeInfos.size());
     }
 

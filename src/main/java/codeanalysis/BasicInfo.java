@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static util.BasicTypeUtil.combineList;
+import static util.BasicTypeUtil.combineListWithoutDuplicate;
 
 public class BasicInfo {
     final List<Path> filesPathInProject;
@@ -24,8 +24,8 @@ public class BasicInfo {
 
         importPaicTypes = BasicTypeUtil.findAllimportPaicTypes(publicTypesInfo);
 
-        importPaicTypesInfo = getImportPaicTypesInfo();
-        publicAndPaicTypesInfo = combineList(publicTypesInfo, importPaicTypesInfo);
+        importPaicTypesInfo = calcImportPaicTypesInfo();
+        publicAndPaicTypesInfo = combineListWithoutDuplicate(publicTypesInfo, importPaicTypesInfo);
     }
 
     List<TypeInfo> calcPublicTypesInfoFromPaths(List<Path> filesPathInProject){
@@ -35,7 +35,7 @@ public class BasicInfo {
                 .collect(Collectors.toList());
     }
 
-    List<TypeInfo> getImportPaicTypesInfo(){
+    List<TypeInfo> calcImportPaicTypesInfo(){
         return importPaicTypes.stream()
                 .map(TypeAnalysis::initTypeWithStr)
                 .filter(Objects::nonNull)
