@@ -15,8 +15,15 @@ import static util.FilePathUtil.getFilesPathInProject;
 public class FileInput {
 
     public static void main(String[] args) {
+        if(args.length == 0){
+            System.out.println("Example: codeAnalysis ./src/this/is/codeSource");
+            return;
+        }
+
 //        List<Path> javaFiles = getJavaFilesPathInProjectByCurrentPath();
-        List<Path> javaFiles = getFilesPathInProject("./src/test/resources/end_to_end_test", "java");
+//        List<Path> javaFiles = getFilesPathInProject("./src/test/resources/end_to_end_test", "java");
+        List<Path> javaFiles = getFilesPathInProject(args[0], "java");
+
         BasicInfo basicInfo = new BasicInfo(javaFiles);
         ProjectInfo p = new ProjectInfo(basicInfo);
 

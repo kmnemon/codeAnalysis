@@ -15,6 +15,7 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.31'
     implementation group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.31'
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
+    implementation 'org.mockito:mockito-core:3.11.2'
 
 
 

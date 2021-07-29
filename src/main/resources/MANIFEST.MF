@@ -1,0 +1,2 @@
+Main-Class: codeanalysis.FileInput
+:q
