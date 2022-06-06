@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="codeanalysis.ModuleInfoTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-14T03:34:42" hostname="Kes-MacBook-Pro.local" time="0.002">
+<testsuite name="codeanalysis.ModuleInfoTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-10T02:15:26" hostname="kes-iMac.local" time="0.0">
   <properties/>
-  <testcase name="sameModuleTests()" classname="codeanalysis.ModuleInfoTests" time="0.002"/>
+  <testcase name="sameModuleTests()" classname="codeanalysis.ModuleInfoTests" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

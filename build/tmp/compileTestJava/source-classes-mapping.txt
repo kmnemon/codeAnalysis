@@ -6,13 +6,13 @@ codeanalysis/BasicInfoTests.java
  codeanalysis.BasicInfoTests
 codeanalysis/ModuleInfoTests.java
  codeanalysis.ModuleInfoTests
-codeanalysis/ProjectDependencyTests.java
- codeanalysis.ProjectDependencyTests
+codeanalysis/ArthAnalysisTests.java
+ codeanalysis.ArthAnalysisTests
+util/MathUtilTests.java
+ util.MathUtilTests
 codeanalysis/ModuleDependencyTests.java
  codeanalysis.ModuleDependencyTests
 codeanalysis/TypeAnalysisTests.java
  codeanalysis.TypeAnalysisTests
-util/MathUtilTests.java
- util.MathUtilTests
-codeanalysis/ArthAnalysisTests.java
- codeanalysis.ArthAnalysisTests
+codeanalysis/ProjectDependencyTests.java
+ codeanalysis.ProjectDependencyTests

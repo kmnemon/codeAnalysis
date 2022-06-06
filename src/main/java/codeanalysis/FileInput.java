@@ -16,7 +16,7 @@ public class FileInput {
 
     public static void main(String[] args) {
         if(args.length == 0){
-            System.out.println("Example: codeAnalysis ./src/this/is/codeSource");
+            System.out.println("Example: codeAnalysis /Users/anna/codeSource/src");
             return;
         }
 

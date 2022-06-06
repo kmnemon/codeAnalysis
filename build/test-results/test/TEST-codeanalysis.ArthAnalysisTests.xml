@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="codeanalysis.ArthAnalysisTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-07-14T03:34:41" hostname="Kes-MacBook-Pro.local" time="0.06">
+<testsuite name="codeanalysis.ArthAnalysisTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-08-10T02:15:26" hostname="kes-iMac.local" time="0.013">
   <properties/>
-  <testcase name="combineAbsAndInsToPairMapTests()" classname="codeanalysis.ArthAnalysisTests" time="0.055"/>
-  <testcase name="calcModuleDistanceTests()" classname="codeanalysis.ArthAnalysisTests" time="0.004"/>
+  <testcase name="combineAbsAndInsToPairMapTests()" classname="codeanalysis.ArthAnalysisTests" time="0.009"/>
+  <testcase name="calcModuleDistanceTests()" classname="codeanalysis.ArthAnalysisTests" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
